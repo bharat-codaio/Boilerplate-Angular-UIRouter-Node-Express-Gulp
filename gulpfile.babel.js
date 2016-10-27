@@ -56,12 +56,6 @@ var PathsFrontEnd = {
     sourceRoot: path.join(__dirname, './FrontEnd/')
 };
 
-var PathsHybrid = {
-    js: './Hybrid/www/js',
-    css: './Hybrid/www/css',
-    html: './Hybrid/www',
-    templates: './Hybrid/www/templates'
-};
 
 gulp.task('BabelFrontend', function() {
     return gulp
@@ -84,7 +78,7 @@ gulp.task('CompressFrontendJs', function() {
 });
 gulp.task('FrontendJs', ['BabelFrontend', 'CompressFrontendJs']);
 gulp.task('watchFrontendJs', function() {
-    gulp.watch([PathsFrontEnd.es6], ['HybridJs', 'BabelFrontend'])
+    gulp.watch([PathsFrontEnd.es6], ['BabelFrontend'])
 });
 gulp.task('watchBabelFrontend', function() {
     gulp.watch([PathsFrontEnd.es5Compressed], ['CompressFrontendJs'])
@@ -94,11 +88,6 @@ gulp.task('Frontend', ['watchFrontendJs', 'watchBabelFrontend', 'watchSass',
     'watchFrontendHtml', 'watchFrontendTemplates', 'watchFrontendImg', 'FrontendJs',
     'sass', 'FrontendHtml', 'FrontendTemplates', 'FrontendImg', 'FrontendLib'
 ]);
-gulp.task('HybridJs', function() {
-    return gulp
-        .src(PathsFrontEnd.es5Compressed)
-        .pipe(gulp.dest(PathsHybrid.js));
-});
 
 gulp.task('sass', function() {
     return gulp
@@ -107,14 +96,9 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(PathsFrontEnd.cssPublic))
 });
 gulp.task('watchSass', function() {
-    gulp.watch([PathsFrontEnd.scss], ['HybridCss', 'sass'])
+    gulp.watch([PathsFrontEnd.scss], ['sass'])
 });
 
-gulp.task('HybridCss', function() {
-    return gulp
-        .src(PathsFrontEnd.css)
-        .pipe(gulp.dest(PathsHybrid.css))
-});
 
 gulp.task('FrontendHtml', function() {
     return gulp
@@ -122,13 +106,9 @@ gulp.task('FrontendHtml', function() {
         .pipe(gulp.dest(PathsFrontEnd.publicHtml))
 });
 
-gulp.task('HybridHtml', function() {
-    return gulp
-        .src(PathsFrontEnd.html)
-        .pipe(gulp.dest(PathsHybrid.html))
-});
+
 gulp.task('watchFrontendHtml', function() {
-    gulp.watch([PathsFrontEnd.html], ['HybridHtml', 'FrontendHtml'])
+    gulp.watch([PathsFrontEnd.html], ['FrontendHtml'])
 });
 
 gulp.task('FrontendTemplates', function() {
@@ -137,14 +117,10 @@ gulp.task('FrontendTemplates', function() {
         .pipe(gulp.dest(PathsFrontEnd.publicTemplates));
 });
 
-gulp.task('HybridTemplates', function() {
-    return gulp
-        .src(PathsFrontEnd.publicTemplates)
-        .pipe(gulp.dest(PathsHybrid.templates))
-});
+
 
 gulp.task('watchFrontendTemplates', function() {
-    gulp.watch([PathsFrontEnd.templates], ['HybridTemplates', 'FrontendTemplates'])
+    gulp.watch([PathsFrontEnd.templates], ['FrontendTemplates'])
 });
 
 gulp.task('FrontendLib', function() {
