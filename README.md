@@ -2,6 +2,7 @@
 A Boilerplate for Angular1-UIRouter front end with Node/Express Backend that uses Gulp
 
 To Run this Boilerplate, 
+
 1. First run the shell script init.sh in your shell. This will transpile all files from ES6, creating dist folders inside Backend and Frontend.
 
 2. Finally, run the server.js inside Backend/dist using 'node server.js' and your server will be up and running, listening at the default port specified in Backend/ServerEnv.js 
